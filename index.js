@@ -14,6 +14,8 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res) {
+  console.log(req.params);
+  console.log(res.params);
   res.render('index', {
     title: 'Mini App',
     activeMainMenu: {
@@ -26,8 +28,8 @@ app.get('/', function(req, res) {
 app.get('/about', function(req, res) {
   res.render('about', {
     title: 'Mini App - about us',
-    activateMainMenu: {
-      about: 'activate',
+    activeMainMenu: {
+      about: 'active',
       contact: ''
     },
   });
@@ -36,9 +38,9 @@ app.get('/about', function(req, res) {
 app.get('/contact', function(req, res) {
   res.render('contact', {
     title: 'Mini App - contact us',
-    activateMainMenu: {
+    activeMainMenu: {
       about: '',
-      contact: 'activate'
+      contact: 'active'
     },
   });
 });
@@ -66,6 +68,17 @@ app.get('/order', function(req, res) {
     product: product,
     activeMainMenu: {
       product: '',
+      about: '',
+      contact: ''
+    },
+  });
+});
+
+
+app.get('/thanks', function(req, res) {
+  res.render('thanks', {
+    title: 'Thank you!',
+    activeMainMenu: {
       about: '',
       contact: ''
     },
