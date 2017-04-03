@@ -77,7 +77,7 @@ app.get('/order', function(req, res) {
 
 app.get('/thanks', function(req, res) {
   res.render('thanks', {
-    title: 'Thank you!',
+    title: 'Thank',
     activeMainMenu: {
       about: '',
       contact: ''
