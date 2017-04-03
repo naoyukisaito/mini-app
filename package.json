@@ -11,5 +11,8 @@
   "dependencies": {
     "express": "^4.15.2",
     "pug": "^2.0.0-beta11"
+  },
+  "devDependencies": {
+    "body-parser": "^1.17.1"
   }
 }
