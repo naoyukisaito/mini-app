@@ -1,12 +1,15 @@
 var express = require('express');
-var products = require('./data/products.json');
+// var products = require('./data/products.json');
 var app = express();
 var bodyParser = require('body-parser');
+var mysql = require('mysql');
+var connection = require('./mysqlConnection');
+console.log(connection);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/assets', express.static(__dirname + '/public'));
 app.post('/contact', function(req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   res.redirect('/');
 });
 
@@ -14,8 +17,8 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 app.get('/', function(req, res) {
-  console.log(req.params);
-  console.log(res.params);
+  // console.log(req.params);
+  // console.log(res.params);
   res.render('index', {
     title: 'Mini App',
     activeMainMenu: {
@@ -46,32 +49,39 @@ app.get('/contact', function(req, res) {
 });
 
 app.get('/product', function(req, res) {
-  res.render('product', {
-    title: 'Mini App - product',
-    products: products,
-    activeMainMenu: {
-      product: 'active',
-      about: '',
-      contact: ''
-    },
-  });
+  connection.query('SELECT * FROM product_detail', function(err, rows, fields) {
+    console.log(rows);
+    res.render('product', {
+      title: 'Mini App - product',
+      products: rows,
+      activeMainMenu: {
+        product: 'active',
+        about: '',
+        contact: ''
+      },
+    });
+  })
 });
 
+
 app.get('/order', function(req, res) {
-  console.log('req.query = ', req.query);
-  var product = products.find(function(product) {
-    return product.id === req.query.id;
-  });
-  console.log('show product = ', product);
-  res.render('order', {
-    title: 'Mini App - product / order',
-    product: product,
-    activeMainMenu: {
-      product: '',
-      about: '',
-      contact: ''
-    },
-  });
+  connection.query('SELECT * FROM product_detail', function(err, rows) {
+    // console.log(rows.image);
+  // console.log('req.query = ', req.query);
+    var product = rows.find(function(product) {
+      return product.id === req.query.id;
+    });
+    // console.log('show product = ', product);
+    res.render('order', {
+      title: 'Mini App - product / order',
+      product: rows,
+      activeMainMenu: {
+        product: '',
+        about: '',
+        contact: ''
+      },
+    });
+  })
 });
 
 
@@ -86,9 +96,13 @@ app.get('/thanks', function(req, res) {
 });
 
 app.post('/order/:id', function(req, res) {
-  console.log(req.params);
-  console.log(req.body);
-  res.redirect('/thanks');
+  console.log(req);
+  console.log('ls');
+  var query = 'INSERT INTO user_info (name, email) VALUES ("' + req.body.name + '", ' + '"' + req.body.email + '")';
+  connection.query(query, function(err, rows) {
+    res.redirect('/thanks');
+  });
+
 });
 
 app.listen(3300, function() {
