@@ -4,7 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var connection = require('./mysqlConnection');
-console.log(connection);
+// console.log(connection);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/assets', express.static(__dirname + '/public'));
@@ -65,16 +65,20 @@ app.get('/product', function(req, res) {
 
 
 app.get('/order', function(req, res) {
-  connection.query('SELECT * FROM product_detail', function(err, rows) {
-    // console.log(rows.image);
+  connection.query('SELECT * FROM product_detail', function(err, rows, fields) {
+    console.log(rows);
   // console.log('req.query = ', req.query);
-    var product = rows.find(function(product) {
-      return product.id === req.query.id;
-    });
-    // console.log('show product = ', product);
+    // var product = rows.find(function(row) {
+    //     console.log(row.length);
+    //     // console.log(req.query.id);
+    //   return row.id === req.query.id;
+    // });
+    var product = rows[req.query.id];
+    console.log(product);
+    
     res.render('order', {
       title: 'Mini App - product / order',
-      product: rows,
+      product: product,
       activeMainMenu: {
         product: '',
         about: '',
