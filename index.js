@@ -68,13 +68,17 @@ app.get('/order', function(req, res) {
   connection.query('SELECT * FROM product_detail', function(err, rows) {
     console.log(rows.id);
   // console.log('req.query = ', req.query);
-    var product = rows.find(function(product) {
-      return product.id === req.query.id;
-    });
-    // console.log('show product = ', product);
+    // var product = rows.find(function(row) {
+    //     console.log(row.length);
+    //     // console.log(req.query.id);
+    //   return row.id === req.query.id;
+    // });
+    var product = rows[req.query.id];
+    console.log(product);
+
     res.render('order', {
       title: 'Mini App - product / order',
-      products: rows,
+      product: product,
       activeMainMenu: {
         product: '',
         about: '',
