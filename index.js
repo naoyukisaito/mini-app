@@ -40,6 +40,29 @@ app.get('/register', function(req, res) {
   });
 });
 
+app.post('/register', function(req, res) {
+  var userName = req.body.user_name;
+  var email = req.body.email;
+  var password = req.body.password;
+  var emailExistsQuery = 'SELECT * FROM users WHERE email = "' + email + '" LIMIT 1';
+  console.log(emailExistsQuery)
+  var registerQuery = 'INSERT INTO users (user_name, email, password) VALUES ("' + userName + '", ' + '"' + email + '", ' + '"' + password + '")';
+  connection.query(emailExistsQuery, function(email, err) {
+    console.log(email);
+    var emailExists = email.length === 1;
+    if (emailExists) {
+      res.render('register', {
+        title: '新規会員登録',
+        emailExists: '既に登録されているメールアドレスです'
+      });
+    } else {
+      connection.query(registerQuery, function(err, rows) {
+        res.redirect('/');
+      });
+    }
+  });
+});
+
 app.get('/about', function(req, res) {
   res.render('about', {
     title: 'Mini App - about us',
