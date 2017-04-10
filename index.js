@@ -28,6 +28,18 @@ app.get('/', function(req, res) {
   });
 });
 
+app.get('/register', function(req, res) {
+  // console.log(req.params);
+  // console.log(res.params);
+  res.render('register', {
+    title: '新規会員登録',
+    activeMainMenu: {
+      about: '',
+      contact: ''
+    },
+  });
+});
+
 app.get('/about', function(req, res) {
   res.render('about', {
     title: 'Mini App - about us',
@@ -73,7 +85,7 @@ app.get('/order', function(req, res) {
     //     // console.log(req.query.id);
     //   return row.id === req.query.id;
     // });
-    var product = rows[req.query.id];
+    var product = rows[req.query.id - 1];
     console.log(product);
 
     res.render('order', {
@@ -89,6 +101,7 @@ app.get('/order', function(req, res) {
 });
 
 
+
 app.get('/thanks', function(req, res) {
   res.render('thanks', {
     title: 'Thank',
@@ -98,6 +111,8 @@ app.get('/thanks', function(req, res) {
     },
   });
 });
+
+// app.get('/')
 
 app.post('/order/:id', function(req, res) {
   console.log(req);

@@ -1,4 +1,17 @@
 extends layout.pug
 block content
-  h1 HOME
-  p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .wrapper
+    h1 ログイン
+    form.form-horizontal(action="/contact" method="post")
+      .form-group
+        label.col-sm-2.control-label E-mail
+        .col-sm-10
+          input.form-control(type="email" name="email" placeholder="E-mail" style="width:auto;")
+      .form-group
+        label.col-sm-2.control-label password
+        .col-sm-10
+          input.form-control(type="password" name="password" placeholder="password" style="width:auto;")
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          input.btn.btn-default(type="submit" value="Log in" style="background:#55b7fd;color:white;border:none;")
+    a(href="/register") 新規会員登録はこちら
