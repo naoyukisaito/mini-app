@@ -52,7 +52,6 @@ app.post('/register', function(req, res) {
     console.log(email);
     var emailExists = email.length === 1;
     if (emailExists) {
-      console.log('nope');
       res.render('register', {
         title: '新規会員登録',
         emailExists: '既に登録されているメールアドレスです'

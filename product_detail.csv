@@ -1,12 +1,12 @@
-id,"name","category",price,availability,"image"
-1,"Keyboard","alpha",5000,4,"1"
-2,"fire TV stick","alpha",1500,6,NULL
+id,"name","category",price,availability
+1,"Keyboard","パソコン・周辺機器",5000,4
+2,"fire TV stick","alpha",1500,6
 3,"fire HD 7
-","alpha",1200,0,NULL
+","タブレット",1200,0
 4,"fire HD 8
-					","alpha",1300,2,NULL
+					","タブレット",1300,2
 5,"paper white
-","alpha",300,1,NULL
-6,"paper white manga","alpha",400,3,NULL
-7,"mouse black","alpha",500,6,NULL
-8,"mouse white","alpha",600,3,NULL
+","タブレット",300,1
+6,"paper white manga","タブレット",400,3
+7,"mouse black","パソコン・周辺機器",500,6
+8,"mouse white","パソコン・周辺機器",600,3
