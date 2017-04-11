@@ -45,12 +45,14 @@ app.post('/register', function(req, res) {
   var email = req.body.email;
   var password = req.body.password;
   var emailExistsQuery = 'SELECT * FROM users WHERE email = "' + email + '" LIMIT 1';
+  console.log('ok')
   console.log(emailExistsQuery)
   var registerQuery = 'INSERT INTO users (user_name, email, password) VALUES ("' + userName + '", ' + '"' + email + '", ' + '"' + password + '")';
-  connection.query(emailExistsQuery, function(email, err) {
+  connection.query(emailExistsQuery, function(err, email) {
     console.log(email);
     var emailExists = email.length === 1;
     if (emailExists) {
+      console.log('nope');
       res.render('register', {
         title: '新規会員登録',
         emailExists: '既に登録されているメールアドレスです'
