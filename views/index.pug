@@ -2,7 +2,7 @@ extends layout.pug
 block content
   .wrapper
     h1 ログイン
-    form.form-horizontal(action="/contact" method="post")
+    form.form-horizontal(action="/" method="post")
       .form-group
         label.col-sm-2.control-label E-mail
         .col-sm-10
@@ -14,4 +14,6 @@ block content
       .form-group
         .col-sm-10.col-sm-offset-2
           input.btn.btn-default(type="submit" value="Log in" style="background:#55b7fd;color:white;border:none;")
+    if !userId
+      p #{noUser} fdfd
     a(href="/register") 新規会員登録はこちら
